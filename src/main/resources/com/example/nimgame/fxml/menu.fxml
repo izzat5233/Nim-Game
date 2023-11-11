@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="960" prefWidth="1440" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nimgame.fxml.MenuController">
+    <children>
+        <ImageView fitHeight="126.0" fitWidth="374.0" layoutX="554.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../assets/texts/menu_title.png" />
+        </ImageView>
+        <ImageView fx:id="imageButtonSinglePlayer" fitHeight="83.0" fitWidth="146.0" layoutX="661.0" layoutY="539.0" onMouseClicked="#onMouseClickButtonSinglePlayer" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../assets/buttons/button_1player.png" />
+        </ImageView>
+        <ImageView fx:id="imageButtonMultiPlayer" fitHeight="94.0" fitWidth="144.0" layoutX="662.0" layoutY="433.0" onMouseClicked="#onMouseClickButtonMultiPlayer" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../assets/buttons/button_2players.png" />
+        </ImageView>
+    </children>
+</AnchorPane>

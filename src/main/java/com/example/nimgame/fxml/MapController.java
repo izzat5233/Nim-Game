@@ -95,7 +95,7 @@ public class MapController
     }
 
     void restart() {
-        game = new AiGame(4);
+        game = new AiGame(5);
         displayGame();
     }
 }

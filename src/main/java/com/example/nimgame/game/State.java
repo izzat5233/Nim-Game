@@ -62,4 +62,15 @@ public class State {
         }
         return string.toString();
     }
+
+    int getHeuristicValue() {
+        int pilesWithMoreThanOne = (int) counts.stream().filter(i -> i > 1).count();
+        // Endgame
+        if (pilesWithMoreThanOne == 1) {
+            return firstPlayerTurn ? -1 : 1;
+        }
+        // Mid-game
+        int oddCountPiles = (int) counts.stream().filter(i -> i % 2 == 1).count();
+        return oddCountPiles % 2 == 0 ? -1 : 1;
+    }
 }

@@ -2,6 +2,7 @@ package com.example.nimgame.game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class State {
@@ -55,22 +56,25 @@ public class State {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        var state = (State) o;
+        return firstPlayerTurn == state.firstPlayerTurn &&
+                counts.equals(state.counts);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstPlayerTurn, counts);
+    }
+
+    @Override
     public String toString() {
         StringBuilder string = new StringBuilder("rows: " + counts.size() + '\n');
         for (int i = 0; i < counts.size(); i++) {
             string.append(i).append(": ").append(counts.get(i)).append('\n');
         }
         return string.toString();
-    }
-
-    int getHeuristicValue() {
-        int pilesWithMoreThanOne = (int) counts.stream().filter(i -> i > 1).count();
-        // Endgame
-        if (pilesWithMoreThanOne == 1) {
-            return firstPlayerTurn ? -1 : 1;
-        }
-        // Mid-game
-        int oddCountPiles = (int) counts.stream().filter(i -> i % 2 == 1).count();
-        return oddCountPiles % 2 == 0 ? -1 : 1;
     }
 }

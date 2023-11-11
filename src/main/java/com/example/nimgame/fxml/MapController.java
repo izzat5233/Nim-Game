@@ -2,7 +2,8 @@ package com.example.nimgame.fxml;
 
 import com.example.nimgame.Launcher;
 import com.example.nimgame.game.AiGame;
-import com.example.nimgame.game.Game;
+import com.example.nimgame.game.ai.AiAgent;
+import com.example.nimgame.game.ai.Difficulty;
 import com.example.nimgame.object.Pile;
 import com.example.nimgame.object.PileSelectionListener;
 import javafx.fxml.FXML;
@@ -17,6 +18,7 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class MapController
         implements Initializable, PileSelectionListener {
@@ -36,11 +38,15 @@ public class MapController
 
     AiGame game;
 
+    int gameRows;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         stoneImage = new Image(String.valueOf(Launcher.class.getResource("assets/items/stone1.png")));
         playButton.setOnAction(e -> play());
         restartButton.setOnAction(e -> restart());
+        System.out.println("Rows:");
+        gameRows = new Scanner(System.in).nextInt();
         restart();
     }
 
@@ -95,7 +101,7 @@ public class MapController
     }
 
     void restart() {
-        game = new AiGame(5);
+        game = new AiGame(gameRows, new AiAgent(Difficulty.HARD));
         displayGame();
     }
 }

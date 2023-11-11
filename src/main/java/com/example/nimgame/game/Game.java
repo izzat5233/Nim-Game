@@ -37,7 +37,7 @@ public class Game {
         setCurrentState(successor);
         if (isEndOfGame()) {
             return (currentState.isFirstPlayerTurn() ?
-                    TurnStatus.SECOND_PLAYER_WON : TurnStatus.FIRST_PLAYER_WON);
+                    TurnStatus.FIRST_PLAYER_WON : TurnStatus.SECOND_PLAYER_WON);
         }
         return TurnStatus.HAS_MOVED;
     }

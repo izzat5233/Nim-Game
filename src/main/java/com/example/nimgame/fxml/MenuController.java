@@ -1,19 +1,43 @@
 package com.example.nimgame.fxml;
 
+import com.example.nimgame.Launcher;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+
 
 public class MenuController {
     @FXML
     public ImageView imageButtonSinglePlayer, imageButtonMultiPlayer;
 
     @FXML
-    public void onMouseClickButtonSinglePlayer() {
-        System.out.println("Single Player");
+    public void onMouseClickButtonSinglePlayer() throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("map.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 843, 434);
+        Stage stage = new Stage();
+        stage.setTitle("New Window");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
-    public void onMouseClickButtonMultiPlayer() {
-        System.out.println("Multiplayer");
+    public void onMouseClickButtonMultiPlayer() throws IOException {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("Multiplayer.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 741, 480);
+            Stage stage = new Stage();
+            stage.setTitle("New Window");
+            stage.setScene(scene);
+            stage.show();
     }
+
 }

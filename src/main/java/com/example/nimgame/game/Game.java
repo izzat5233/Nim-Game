@@ -8,17 +8,39 @@ public class Game {
 
     private List<State> currentSuccessors;
 
+    private TurnStatus currentTurnStatus = TurnStatus.GAME_START;
+
+    private boolean freeze = false;
+
+    protected final ArrayList<TurnStatusListener> turnStatusListeners = new ArrayList<>();
+
     public Game(int rows) {
         var counts = new ArrayList<Integer>();
-        for (int i = 0; i < rows; i++) {
-            counts.add(2 * i + 1);
-        }
-        setCurrentState(new State(counts));
+        for (int i = 0; i < rows; i++) counts.add(2 * i + 1);
+        var state = new State(counts);
+        setGameVariables(state, state.getAllSuccessors(), TurnStatus.FIRST_PLAYER_TURN);
     }
 
-    private void setCurrentState(State state) {
+    void setGameVariables(State state, List<State> successors, TurnStatus status) {
+        if (freeze) return;
         currentState = state;
-        currentSuccessors = currentState.getAllSuccessors();
+        currentSuccessors = successors;
+        if (currentTurnStatus != status) {
+            currentTurnStatus = status;
+            notifyTurnStatusListeners();
+        }
+    }
+
+    protected void notifyTurnStatusListeners() {
+        turnStatusListeners.forEach(i -> i.onTurnStatusChange(currentTurnStatus));
+    }
+
+    public void subscribeTurnStatus(TurnStatusListener listener) {
+        turnStatusListeners.add(listener);
+    }
+
+    public void unsubscribeTurnStatus(TurnStatusListener listener) {
+        turnStatusListeners.remove(listener);
     }
 
     public State getCurrentState() {
@@ -29,24 +51,19 @@ public class Game {
         return currentSuccessors;
     }
 
+    public TurnStatus getCurrentTurnStatus() {
+        return currentTurnStatus;
+    }
+
     public boolean isEndOfGame() {
         return currentSuccessors.isEmpty();
     }
 
-    protected TurnStatus play(State successor) {
-        setCurrentState(successor);
-        if (isEndOfGame()) {
-            return (currentState.isFirstPlayerTurn() ?
-                    TurnStatus.FIRST_PLAYER_WON : TurnStatus.SECOND_PLAYER_WON);
-        }
-        return TurnStatus.HAS_MOVED;
+    public void freeze() {
+        freeze = true;
     }
 
-    public TurnStatus play(int row, int removeAmount) {
-        var successor = currentState.getSuccessor(row, removeAmount);
-        if (successor.isEmpty()) {
-            return TurnStatus.MOVE_NOT_ALLOWED;
-        }
-        return play(successor.get());
+    public void unfreeze() {
+        freeze = false;
     }
 }

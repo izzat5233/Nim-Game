@@ -3,8 +3,9 @@ package com.example.nimgame.game.ai;
 import com.example.nimgame.game.State;
 
 import java.util.HashMap;
+import java.util.Random;
 
-public class AiAgent {
+public class AiPlayer {
     private record StateKey(State state, boolean maximizing) {
     }
 
@@ -12,7 +13,7 @@ public class AiAgent {
 
     private final Difficulty difficulty;
 
-    public AiAgent(Difficulty difficulty) {
+    public AiPlayer(Difficulty difficulty) {
         this.difficulty = difficulty;
     }
 
@@ -36,32 +37,38 @@ public class AiAgent {
         return oddCountPiles % 2 == 0 ? -res : res;
     }
 
-    public State bestSuccessor(State state) {
+    public State getSuccessor(State state) {
+        if (difficulty.isRandom()) {
+            return randomSuccessor(state);
+        }
+
         memo.clear();
         int best = Integer.MIN_VALUE;
         State successor = null;
         for (var i : state.getAllSuccessors()) {
-            int v = alphaBeta(i, Integer.MIN_VALUE, Integer.MAX_VALUE, difficulty.getDepth(), false);
+            int v = alphaBeta(i, Integer.MIN_VALUE, Integer.MAX_VALUE, difficulty.getSearchDepth(), false);
             if (v > best) {
                 best = v;
                 successor = i;
             }
             if (v == 1) break;
         }
+        memo.clear();
         return successor;
+    }
+
+    private State randomSuccessor(State state) {
+        var random = new Random(System.nanoTime());
+        var successors = state.getAllSuccessors();
+        return successors.get(random.nextInt(successors.size()));
     }
 
     private int alphaBeta(State state, int a, int b, int depth, boolean maximizing) {
         var pair = new StateKey(state, maximizing);
         var successors = state.getAllSuccessors();
 
-        if (memo.containsKey(pair)) {
-            return memo.get(pair);
-        }
-
-        if (depth == 0 || successors.isEmpty()) {
-            return getHeuristicValue(pair);
-        }
+        if (memo.containsKey(pair)) return memo.get(pair);
+        if (depth == 0 || successors.isEmpty()) return getHeuristicValue(pair);
 
         int best;
         if (maximizing) {

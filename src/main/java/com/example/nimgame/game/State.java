@@ -32,9 +32,7 @@ public class State {
     }
 
     public Optional<State> getSuccessor(int row, int removeAmount) {
-        if (counts.get(row) < removeAmount) {
-            return Optional.empty();
-        }
+        if (counts.get(row) < removeAmount) return Optional.empty();
         var newCounts = new ArrayList<>(counts);
         newCounts.set(row, newCounts.get(row) - removeAmount);
         return Optional.of(new State(newCounts, !firstPlayerTurn));

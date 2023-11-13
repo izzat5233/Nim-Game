@@ -1,4 +1,4 @@
-package com.example.nimgame.object;
+package com.example.nimgame.fxml.object;
 
 public interface PileSelectionListener {
     default void onPileSelectionChange(Pile pile) {

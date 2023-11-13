@@ -3,10 +3,10 @@ package com.example.nimgame.fxml;
 import com.example.nimgame.Launcher;
 import com.example.nimgame.fxml.object.Pile;
 import com.example.nimgame.fxml.object.PileSelectionListener;
-import com.example.nimgame.game.AiGameFlow;
+import com.example.nimgame.game.flow.AiFlow;
 import com.example.nimgame.game.Game;
-import com.example.nimgame.game.TurnStatus;
-import com.example.nimgame.game.TurnStatusListener;
+import com.example.nimgame.game.Status;
+import com.example.nimgame.game.StatusListener;
 import com.example.nimgame.game.ai.AiPlayer;
 import com.example.nimgame.game.ai.Difficulty;
 import javafx.fxml.FXML;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MapController
-        implements Initializable, PileSelectionListener, TurnStatusListener {
+        implements Initializable, PileSelectionListener, StatusListener {
 
     @FXML
     public AnchorPane mapRoot;
@@ -49,7 +49,7 @@ public class MapController
 
     Image stoneImage;
 
-    AiGameFlow gameFlow;
+    AiFlow gameFlow;
 
     Difficulty difficulty;
 
@@ -80,8 +80,8 @@ public class MapController
 
     private void restart() {
         setDifficulty();
-        gameFlow = new AiGameFlow(new Game(gameRows), new AiPlayer(difficulty));
-        gameFlow.getGame().subscribeTurnStatus(this);
+        gameFlow = new AiFlow(new Game(gameRows), new AiPlayer(difficulty));
+        gameFlow.getGame().subscribe(this);
         displayGame();
     }
 
@@ -99,7 +99,7 @@ public class MapController
 
     private void displayGame() {
         rows = new ArrayList<>();
-        var state = gameFlow.getGame().getCurrentState();
+        var state = gameFlow.getGame().getPosition();
         for (var count : state.getCounts()) {
             var pile = new Pile(new HBox(), stoneImage, count);
             pile.subscribe(this);
@@ -117,7 +117,7 @@ public class MapController
     }
 
     @Override
-    public void onTurnStatusChange(TurnStatus status) {
+    public void onStatusChange(Status status) {
         labelPlayerTurn.setText(status.toString());
         displayGame();
     }

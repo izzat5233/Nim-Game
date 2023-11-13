@@ -11,4 +11,5 @@ module com.example.nimgame {
     opens com.example.nimgame.fxml to javafx.fxml;
     exports com.example.nimgame.fxml.object;
     opens com.example.nimgame.fxml.object to javafx.fxml;
+    exports com.example.nimgame.game.flow;
 }

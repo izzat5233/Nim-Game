@@ -5,17 +5,17 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class State {
+public class Position {
     private final boolean firstPlayerTurn;
 
     private final List<Integer> counts;
 
-    private State(List<Integer> counts, boolean firstPlayerTurn) {
+    private Position(List<Integer> counts, boolean firstPlayerTurn) {
         this.counts = counts;
         this.firstPlayerTurn = firstPlayerTurn;
     }
 
-    State(List<Integer> counts) {
+    Position(List<Integer> counts) {
         this(counts, true);
     }
 
@@ -31,22 +31,22 @@ public class State {
         return counts.get(row) >= removeAmount;
     }
 
-    public Optional<State> getSuccessor(int row, int removeAmount) {
+    public Optional<Position> getSuccessor(int row, int removeAmount) {
         if (counts.get(row) < removeAmount) return Optional.empty();
         var newCounts = new ArrayList<>(counts);
         newCounts.set(row, newCounts.get(row) - removeAmount);
-        return Optional.of(new State(newCounts, !firstPlayerTurn));
+        return Optional.of(new Position(newCounts, !firstPlayerTurn));
     }
 
-    public List<State> getAllSuccessors() {
-        var successors = new ArrayList<State>();
+    public List<Position> getAllSuccessors() {
+        var successors = new ArrayList<Position>();
 
         for (int i = 0; i < counts.size(); i++) {
             int count = counts.get(i);
             for (int j = 1; j <= count; j++) {
                 var newCounts = new ArrayList<>(counts);
                 newCounts.set(i, count - j);
-                successors.add(new State(newCounts, !firstPlayerTurn));
+                successors.add(new Position(newCounts, !firstPlayerTurn));
             }
         }
 
@@ -57,7 +57,7 @@ public class State {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        var state = (State) o;
+        var state = (Position) o;
         return firstPlayerTurn == state.firstPlayerTurn &&
                 counts.equals(state.counts);
     }

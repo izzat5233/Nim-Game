@@ -4,66 +4,68 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    private State currentState;
+    private Position position;
 
-    private List<State> currentSuccessors;
+    private List<Position> successors;
 
-    private TurnStatus currentTurnStatus = TurnStatus.GAME_START;
+    private Status status = Status.GAME_START;
 
-    private boolean freeze = false;
+    private boolean frozen = false;
 
-    protected final ArrayList<TurnStatusListener> turnStatusListeners = new ArrayList<>();
+    protected final ArrayList<StatusListener> statusListeners = new ArrayList<>();
 
     public Game(int rows) {
         var counts = new ArrayList<Integer>();
         for (int i = 0; i < rows; i++) counts.add(2 * i + 1);
-        var state = new State(counts);
-        setGameVariables(state, state.getAllSuccessors(), TurnStatus.FIRST_PLAYER_TURN);
+        var state = new Position(counts);
+        move(state, Status.FIRST_PLAYER_TURN);
     }
 
-    void setGameVariables(State state, List<State> successors, TurnStatus status) {
-        if (freeze) return;
-        currentState = state;
-        currentSuccessors = successors;
-        if (currentTurnStatus != status) {
-            currentTurnStatus = status;
-            notifyTurnStatusListeners();
-        }
+    protected void notifyStatusListeners() {
+        statusListeners.forEach(i -> i.onStatusChange(status));
     }
 
-    protected void notifyTurnStatusListeners() {
-        turnStatusListeners.forEach(i -> i.onTurnStatusChange(currentTurnStatus));
+    public void subscribe(StatusListener listener) {
+        statusListeners.add(listener);
     }
 
-    public void subscribeTurnStatus(TurnStatusListener listener) {
-        turnStatusListeners.add(listener);
+    public void unsubscribe(StatusListener listener) {
+        statusListeners.remove(listener);
     }
 
-    public void unsubscribeTurnStatus(TurnStatusListener listener) {
-        turnStatusListeners.remove(listener);
+    public Position getPosition() {
+        return position;
     }
 
-    public State getCurrentState() {
-        return currentState;
+    public List<Position> getSuccessors() {
+        return successors;
     }
 
-    public List<State> getCurrentSuccessors() {
-        return currentSuccessors;
-    }
-
-    public TurnStatus getCurrentTurnStatus() {
-        return currentTurnStatus;
+    public Status getStatus() {
+        return status;
     }
 
     public boolean isEndOfGame() {
-        return currentSuccessors.isEmpty();
+        return successors.isEmpty();
     }
 
     public void freeze() {
-        freeze = true;
+        frozen = true;
     }
 
     public void unfreeze() {
-        freeze = false;
+        frozen = false;
+    }
+
+    public void move(Position newPosition, Status newStatus) {
+        if (frozen) return;
+        if (position != newPosition) {
+            position = newPosition;
+            successors = newPosition.getAllSuccessors();
+        }
+        if (status != newStatus) {
+            status = newStatus;
+            notifyStatusListeners();
+        }
     }
 }

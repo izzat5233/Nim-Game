@@ -14,7 +14,7 @@
 - Implement game with alpha-beta pruning to create an intelligent AI opponent. The AI player should evaluate different
   game states, considering possible moves and countermoves to make optimal decisions.
 - Develop an interactive user interface for the Nim game. Include options for players to input their moves and visualize
-  the game state. Display the current state of the game, and available heaps.
+  the game position. Display the current position of the game, and available heaps.
 - Implement a good evaluation function
 - Implement different difficulty levels for the AI opponent. Allow users to choose between easy, medium, and hard
   levels.

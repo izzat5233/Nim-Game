@@ -1,6 +1,6 @@
 package com.example.nimgame.game;
 
-public enum TurnStatus {
+public enum Status {
     GAME_START("Game Start"),
     FIRST_PLAYER_TURN("P1 Turn"),
     SECOND_PLAYER_TURN("P2 Turn"),
@@ -11,7 +11,7 @@ public enum TurnStatus {
 
     private final String string;
 
-    TurnStatus(String string) {
+    Status(String string) {
         this.string = string;
     }
 

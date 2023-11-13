@@ -1,6 +1,5 @@
 package com.example.nimgame;
 
-import com.example.nimgame.game.State;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

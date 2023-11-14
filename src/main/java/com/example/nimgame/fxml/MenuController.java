@@ -24,7 +24,7 @@ public class MenuController {
         fxmlLoader.setLocation(getClass().getResource("map.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 843, 434);
         Stage stage = new Stage();
-        stage.setTitle("Games");
+        stage.setTitle("New Window");
         stage.setScene(scene);
         stage.show();
     }
@@ -32,10 +32,10 @@ public class MenuController {
     @FXML
     public void onMouseClickButtonMultiPlayer() throws IOException {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("Names.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 468, 346);
+            fxmlLoader.setLocation(getClass().getResource("Multiplayer.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 741, 480);
             Stage stage = new Stage();
-            stage.setTitle("Players Name");
+            stage.setTitle("New Window");
             stage.setScene(scene);
             stage.show();
     }

@@ -1,4 +1,4 @@
-package com.example.nimgame.object;
+package com.example.nimgame.fxml.object;
 
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;

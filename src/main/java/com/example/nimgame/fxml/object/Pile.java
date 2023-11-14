@@ -1,4 +1,4 @@
-package com.example.nimgame.object;
+package com.example.nimgame.fxml.object;
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;

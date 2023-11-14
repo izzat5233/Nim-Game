@@ -1,17 +1,26 @@
 package com.example.nimgame.game.ai;
 
 public enum Difficulty {
-    EASY(0),
-    MEDIUM(2),
-    HARD(-1);
+    EASY(true, 0),
+    MEDIUM(false, 0),
+    HARD(false, 4),
+    PERFECT(false, -1),
+    ;
 
-    private final int depth;
+    private final boolean random;
 
-    Difficulty(int depth) {
-        this.depth = depth;
+    private final int searchDepth;
+
+    Difficulty(boolean random, int searchDepth) {
+        this.random = random;
+        this.searchDepth = searchDepth;
     }
 
-    public int getDepth() {
-        return depth;
+    public boolean isRandom() {
+        return random;
+    }
+
+    public int getSearchDepth() {
+        return searchDepth;
     }
 }

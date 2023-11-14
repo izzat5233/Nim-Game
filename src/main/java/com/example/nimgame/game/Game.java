@@ -4,49 +4,68 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    private State currentState;
+    private Position position;
 
-    private List<State> currentSuccessors;
+    private List<Position> successors;
+
+    private Status status = Status.GAME_START;
+
+    private boolean frozen = false;
+
+    protected final ArrayList<StatusListener> statusListeners = new ArrayList<>();
 
     public Game(int rows) {
         var counts = new ArrayList<Integer>();
-        for (int i = 0; i < rows; i++) {
-            counts.add(2 * i + 1);
-        }
-        setCurrentState(new State(counts));
+        for (int i = 0; i < rows; i++) counts.add(2 * i + 1);
+        var state = new Position(counts);
+        move(state, Status.FIRST_PLAYER_TURN);
     }
 
-    private void setCurrentState(State state) {
-        currentState = state;
-        currentSuccessors = currentState.getAllSuccessors();
+    protected void notifyStatusListeners() {
+        statusListeners.forEach(i -> i.onStatusChange(status));
     }
 
-    public State getCurrentState() {
-        return currentState;
+    public void subscribe(StatusListener listener) {
+        statusListeners.add(listener);
     }
 
-    public List<State> getCurrentSuccessors() {
-        return currentSuccessors;
+    public void unsubscribe(StatusListener listener) {
+        statusListeners.remove(listener);
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public List<Position> getSuccessors() {
+        return successors;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     public boolean isEndOfGame() {
-        return currentSuccessors.isEmpty();
+        return successors.isEmpty();
     }
 
-    protected TurnStatus play(State successor) {
-        setCurrentState(successor);
-        if (isEndOfGame()) {
-            return (currentState.isFirstPlayerTurn() ?
-                    TurnStatus.FIRST_PLAYER_WON : TurnStatus.SECOND_PLAYER_WON);
-        }
-        return TurnStatus.HAS_MOVED;
+    public void freeze() {
+        frozen = true;
     }
 
-    public TurnStatus play(int row, int removeAmount) {
-        var successor = currentState.getSuccessor(row, removeAmount);
-        if (successor.isEmpty()) {
-            return TurnStatus.MOVE_NOT_ALLOWED;
+    public void unfreeze() {
+        frozen = false;
+    }
+
+    public void move(Position newPosition, Status newStatus) {
+        if (frozen) return;
+        if (position != newPosition) {
+            position = newPosition;
+            successors = newPosition.getAllSuccessors();
         }
-        return play(successor.get());
+        if (status != newStatus) {
+            status = newStatus;
+            notifyStatusListeners();
+        }
     }
 }

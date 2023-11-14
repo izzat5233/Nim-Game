@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78e009c0-4cbc-4598-98db-2e788037eb2f" name="Changes" comment="Updated 'Game' structure.">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/backgrounds/table_background.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/fxml/MapController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/fxml/MapController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/fxml/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/fxml/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/fxml/map.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/fxml/map.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/fxml/menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/fxml/menu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/styles/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/styles/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

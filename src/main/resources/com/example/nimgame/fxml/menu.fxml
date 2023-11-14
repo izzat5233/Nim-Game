@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="menuRoot" prefHeight="573.0" prefWidth="783.0" style="-fx-background-color: #333;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nimgame.fxml.MenuController">
+<AnchorPane fx:id="menuRoot" prefHeight="573.0" prefWidth="783.0" style="-fx-background-color: #333;" stylesheets="@../styles/globals.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nimgame.fxml.MenuController">
     <children>
         <ImageView fitHeight="126.0" fitWidth="374.0" layoutX="205.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../assets/texts/menu_title.png" />
         </ImageView>
-        <ImageView fx:id="imageButtonSinglePlayer" fitHeight="83.0" fitWidth="146.0" layoutX="312.0" layoutY="375.0" onMouseClicked="#onMouseClickButtonSinglePlayer" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="imageButtonSinglePlayer" fitHeight="83.0" fitWidth="146.0" layoutX="312.0" layoutY="375.0" onMouseClicked="#onMouseClickButtonSinglePlayer" pickOnBounds="true" preserveRatio="true" styleClass="twoPlayersButton">
             <Image url="@../assets/buttons/button_1player.png" />
         </ImageView>
-        <ImageView fx:id="imageButtonMultiPlayer" fitHeight="94.0" fitWidth="144.0" layoutX="313.0" layoutY="269.0" onMouseClicked="#onMouseClickButtonMultiPlayer" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="imageButtonMultiPlayer" fitHeight="94.0" fitWidth="144.0" layoutX="313.0" layoutY="269.0" onMouseClicked="#onMouseClickButtonMultiPlayer" pickOnBounds="true" preserveRatio="true" styleClass="twoPlayersButton">
             <Image url="@../assets/buttons/button_2players.png" />
         </ImageView>
+      <Label text="Label" />
+      <Label contentDisplay="CENTER" layoutY="495.0" prefHeight="38.0" prefWidth="182.0" text="Shareef Mwafy" textAlignment="CENTER" textFill="#a49f9f">
+         <font>
+            <Font name="Harlow Solid Italic" size="20.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="CENTER" layoutY="534.0" prefHeight="38.0" prefWidth="144.0" text="Izzat Al-Sharif" textAlignment="CENTER" textFill="#a49f9f">
+         <font>
+            <Font name="Harlow Solid Italic" size="20.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

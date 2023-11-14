@@ -118,7 +118,7 @@
                   <Font name="Comic Sans MS Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="PlayButton" layoutX="194.0" layoutY="330.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="284.0" style="-fx-background-color: #1DBCC4; -fx-background-radius: 10px;" text="Play">
+            <Button fx:id="playButtonID" layoutX="194.0" layoutY="330.0" mnemonicParsing="false" onAction="#PlayButton" prefHeight="32.0" prefWidth="284.0" style="-fx-background-color: #1DBCC4; -fx-background-radius: 10px;" text="Play">
                <font>
                   <Font name="Comic Sans MS Bold" size="15.0" />
                </font>
@@ -128,6 +128,16 @@
                   <Font name="Comic Sans MS Bold" size="15.0" />
                </font>
             </Button>
+            <Label fx:id="playerNamePlay" layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="157.0" text="XXXXXXXXX" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="won" contentDisplay="CENTER" layoutX="14.0" layoutY="85.0" prefHeight="76.0" prefWidth="232.0" textFill="#ff4e4e">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

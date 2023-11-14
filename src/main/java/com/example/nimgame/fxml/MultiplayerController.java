@@ -1,15 +1,26 @@
 package com.example.nimgame.fxml;
 
+import com.example.nimgame.object.PileSelectionListener;
+import com.example.nimgame.object.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class MultiplayerController {
+import javafx.scene.control.TextField;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class MultiplayerController implements Initializable, PileSelectionListener {
 
     @FXML
     private Button newGameButton;
 
+
+    @FXML
+    private Label playerNamePlay;
 
     @FXML
     private Label one_th;
@@ -82,8 +93,77 @@ public class MultiplayerController {
     int row3 = 5;
     int row4 = 7;
 
-//    @FXML
-//    private  Label [] ={oud1,oud2,oud3,oud4,oud5,oud6,oud7,oud8,oud9,oud10,oud11,oud12,oud13,oud14,oud15,oud16};
+
+    public Player player1 = new Player();
+    public Player player2 = new Player();
+    private String pMulti1="",pMulti2="";
+
+
+
+    public void setNames(String ppMulti1,String ppMulti2){
+        pMulti1=ppMulti1;
+        pMulti2 = ppMulti2;
+        player1.setName(pMulti1);
+        player2.setName(pMulti2);
+    }
+
+
+    public void setNameplay(String playerName){
+        playerNamePlay.setText(playerName);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        playerNamePlay.setText(player1.getName());
+    }
+    //oud1 + oud2 + oud3 + oud4 + oud5 + oud6 + oud7 + oud8 + oud9 + oud10 + oud11 + oud12 + oud13 + oud14 + oud16 + oud15
+    public int sumOfOud(){
+        int sum = row1 + row2 + row3 + row4;
+        return sum;
+    }
+
+
+    boolean toggle=true;
+    //true means First Player
+    @FXML
+    private Button playButtonID;
+    @FXML
+    private Label won;
+    @FXML
+    void PlayButton(ActionEvent event) {
+        rowOneButton.setDisable(false);
+        rowTowButton.setDisable(false);
+        rowFourButton.setDisable(false);
+        rowThreeButton.setDisable(false);
+
+        int A = sumOfOud();
+        if(A >= 0 && A!=1){
+            if(toggle==true){
+                playerNamePlay.setText(player1.getName());
+                toggle=false;
+            }
+            else{
+                playerNamePlay.setText(player2.getName());
+                toggle=true;
+            }
+        }
+        else if (A==1) {
+            if (toggle==false){
+             won.setText(player1.getName()+" Won");
+            }
+            else {
+                won.setText(player2.getName()+" Won");
+            }
+        }
+        else {
+            playButtonID.setDisable(true);
+        }
+    }
+
+
+
+
 
 
     @FXML
@@ -198,10 +278,7 @@ public class MultiplayerController {
         rowThreeButton.setDisable(false);
         rowTowButton.setDisable(false);
         rowFourButton.setDisable(false);
-
-//        String showOud="oud";
-
-//            String showOud = "oud"+i;
+        won.setText("");
         oud1.setText("|");
         oud2.setText("|");
         oud3.setText("|");
@@ -218,11 +295,6 @@ public class MultiplayerController {
         oud14.setText("|");
         oud15.setText("|");
         oud16.setText("|");
-
-
-
-
-
     }
 
 

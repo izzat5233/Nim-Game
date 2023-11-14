@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="346.0" prefWidth="468.0" style="-fx-background-color: #D2D2D1;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nimgame.fxml.PlayerNameController">
+<AnchorPane prefHeight="346.0" prefWidth="468.0" style="-fx-background-color: #D2D2D1;" stylesheets="@../styles/globals.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nimgame.fxml.PlayerNameController">
     <children>
         <Pane prefHeight="78.0" prefWidth="468.0" style="-fx-background-color: #333;">
             <children>
@@ -31,7 +31,7 @@
                 <Font name="Arial Rounded MT Bold" size="20.0" />
             </font>
         </Text>
-        <Button layoutX="83.0" layoutY="248.0" mnemonicParsing="false" onAction="#OkayButton" prefHeight="52.0" prefWidth="302.0" style="-fx-background-color: #333; -fx-background-radius: 15; -fx-font-size: 25px;" text="Okay" textFill="WHITE">
+        <Button layoutX="83.0" layoutY="248.0" mnemonicParsing="false" onAction="#OkayButton" prefHeight="52.0" prefWidth="302.0" styleClass="OkayName" text="Okay" textFill="WHITE">
             <font>
                 <Font name="Bodoni MT Condensed Bold" size="27.0" />
             </font>

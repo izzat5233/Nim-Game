@@ -9,10 +9,10 @@
         <ImageView fitHeight="126.0" fitWidth="374.0" layoutX="205.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../assets/texts/menu_title.png" />
         </ImageView>
-        <ImageView fx:id="imageButtonSinglePlayer" fitHeight="83.0" fitWidth="146.0" layoutX="312.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="imageButtonSinglePlayer" fitHeight="83.0" fitWidth="146.0" layoutX="312.0" layoutY="375.0" onMouseClicked="#onMouseClickButtonSinglePlayer" pickOnBounds="true" preserveRatio="true">
             <Image url="@../assets/buttons/button_1player.png" />
         </ImageView>
-        <ImageView fx:id="imageButtonMultiPlayer" fitHeight="94.0" fitWidth="144.0" layoutX="313.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="imageButtonMultiPlayer" fitHeight="94.0" fitWidth="144.0" layoutX="313.0" layoutY="269.0" onMouseClicked="#onMouseClickButtonMultiPlayer" pickOnBounds="true" preserveRatio="true">
             <Image url="@../assets/buttons/button_2players.png" />
         </ImageView>
     </children>

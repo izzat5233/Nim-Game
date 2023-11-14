@@ -1,6 +1,6 @@
 package com.example.nimgame.fxml;
 
-import com.example.nimgame.object.PileSelectionListener;
+//import com.example.nimgame.object.PileSelectionListener;
 import com.example.nimgame.object.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,12 +8,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-import javafx.scene.control.TextField;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MultiplayerController implements Initializable, PileSelectionListener {
+public class MultiplayerController implements Initializable {
 
     @FXML
     private Button newGameButton;
@@ -117,14 +115,13 @@ public class MultiplayerController implements Initializable, PileSelectionListen
 
         playerNamePlay.setText(player1.getName());
     }
-    //oud1 + oud2 + oud3 + oud4 + oud5 + oud6 + oud7 + oud8 + oud9 + oud10 + oud11 + oud12 + oud13 + oud14 + oud16 + oud15
     public int sumOfOud(){
         int sum = row1 + row2 + row3 + row4;
         return sum;
     }
 
 
-    boolean toggle=true;
+    boolean toggle=false;
     //true means First Player
     @FXML
     private Button playButtonID;
@@ -138,22 +135,32 @@ public class MultiplayerController implements Initializable, PileSelectionListen
         rowThreeButton.setDisable(false);
 
         int A = sumOfOud();
-        if(A >= 0 && A!=1){
+        if(A > 0 && A!=1){
             if(toggle==true){
                 playerNamePlay.setText(player1.getName());
-                toggle=false;
+                toggle=!toggle;
             }
             else{
                 playerNamePlay.setText(player2.getName());
-                toggle=true;
+                toggle=!toggle;
             }
         }
-        else if (A==1) {
+        else if (A==1 || A==0) {
             if (toggle==false){
              won.setText(player1.getName()+" Won");
+                playButtonID.setDisable(true);
+                rowOneButton.setDisable(true);
+                rowTowButton.setDisable(true);
+                rowFourButton.setDisable(true);
+                rowThreeButton.setDisable(true);
             }
             else {
                 won.setText(player2.getName()+" Won");
+                playButtonID.setDisable(true);
+                rowOneButton.setDisable(true);
+                rowTowButton.setDisable(true);
+                rowFourButton.setDisable(true);
+                rowThreeButton.setDisable(true);
             }
         }
         else {
@@ -278,6 +285,7 @@ public class MultiplayerController implements Initializable, PileSelectionListen
         rowThreeButton.setDisable(false);
         rowTowButton.setDisable(false);
         rowFourButton.setDisable(false);
+        playButtonID.setDisable(false);
         won.setText("");
         oud1.setText("|");
         oud2.setText("|");

@@ -1,7 +1,6 @@
 package com.example.nimgame.fxml;
 
-import com.example.nimgame.object.PileSelectionListener;
-import com.example.nimgame.object.Player;
+//import com.example.nimgame.object.PileSelectionListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,7 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class PlayerNameController implements Initializable, PileSelectionListener {
+public class PlayerNameController implements Initializable {
 
 
     @FXML
@@ -32,8 +30,6 @@ public class PlayerNameController implements Initializable, PileSelectionListene
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
     }
 
 

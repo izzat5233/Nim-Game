@@ -1,0 +1,42 @@
+.buttonRow{
+    -fx-background-color: #61B3DC;
+    -fx-background-radius: 10px;
+}
+
+.buttonRow:hover{
+    -fx-background-color:  #333;
+    -fx-border-radius: 10px;
+    -fx-text-fill: white;
+    -fx-border-width: 2px;
+    -fx-border-color:#61B3DC;
+}
+
+.endButton{
+    -fx-background-color:  #1DBCC4;
+    -fx-background-radius: 10px;
+
+}
+
+.endButton:hover{
+     -fx-background-color:  #333;
+     -fx-border-radius: 10px;
+     -fx-text-fill: white;
+     -fx-border-width: 2px;
+     -fx-border-color:#1DBCC4;
+}
+
+
+.OkayName{
+    -fx-background-color: #333;
+    -fx-background-radius:15px;
+    -fx-font-size: 25px;
+}
+
+.OkayName:hover{
+    -fx-background-color:  #D2D2D1;
+    -fx-border-radius:15px;
+    -fx-font-size: 25px;
+    -fx-border-color: #333;
+    -fx-border-width:4px;
+
+}

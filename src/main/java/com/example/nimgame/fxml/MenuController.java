@@ -22,7 +22,7 @@ public class MenuController {
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("map.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 843, 434);
+        Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.setTitle("Map Game");
         stage.setScene(scene);

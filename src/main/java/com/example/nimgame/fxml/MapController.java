@@ -31,9 +31,6 @@ public class MapController
     public AnchorPane mapRoot;
 
     @FXML
-    public StackPane mapStackPane;
-
-    @FXML
     public VBox pilesContainer;
 
     @FXML

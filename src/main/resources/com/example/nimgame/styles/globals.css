@@ -40,3 +40,26 @@
     -fx-border-width:4px;
 
 }
+
+.mapButton{
+    -fx-background-color: #5FD4DA;
+    -fx-background-radius: 20px;
+
+}
+.mapButton:hover{
+    -fx-background-color:  transparent;
+    -fx-border-radius: 20px;
+    -fx-border-width: 3px;
+    -fx-border-color:#5FD4DA;
+    -fx-text-fill:white;
+}
+.twoPlayersButton{
+    -fx-width:20px
+}
+
+
+.twoPlayersButton:hover{
+    -fx-scale-x:1.2;
+    -fx-scale-y:1.2;
+
+}

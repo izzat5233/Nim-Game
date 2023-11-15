@@ -10,14 +10,20 @@ import javafx.concurrent.Task;
 public class AiGameFlow extends GameFlow
         implements StatusListener {
 
-    private static final long MINIMUM_DELAY_TIME = 1000;
-
     private final AiPlayer player;
 
-    public AiGameFlow(Game game, AiPlayer player) {
+    private final Status playOnStatus;
+
+    public AiGameFlow(Game game, AiPlayer player, boolean isAiSecondPlayer) {
         super(game);
-        this.player = player;
         game.subscribe(this);
+        this.player = player;
+        this.playOnStatus = isAiSecondPlayer ?
+                Status.SECOND_PLAYER_TURN : Status.FIRST_PLAYER_TURN;
+    }
+
+    public AiGameFlow(Game game, AiPlayer player) {
+        this(game, player, true);
     }
 
     public Task<Position> createAiTask() {
@@ -29,7 +35,8 @@ public class AiGameFlow extends GameFlow
                 long t2 = System.currentTimeMillis() - t1;
 
                 try {
-                    Thread.sleep(Math.max(MINIMUM_DELAY_TIME - t2, 0));
+                    var delay = player.getDifficulty().getMinimumDelayTime();
+                    Thread.sleep(Math.max(delay - t2, 0));
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
@@ -41,7 +48,7 @@ public class AiGameFlow extends GameFlow
 
     @Override
     public void onStatusChange(Status status) {
-        if (status == Status.SECOND_PLAYER_TURN) {
+        if (status == playOnStatus) {
             game.freeze();
             var task = createAiTask();
             task.setOnSucceeded(e -> {

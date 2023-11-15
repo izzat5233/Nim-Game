@@ -14,6 +14,10 @@ public class AiPlayer {
         this.difficulty = difficulty;
     }
 
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
     public Position getSuccessor(Position position) {
         if (difficulty.isRandom()) {
             return randomSuccessor(position);
@@ -30,6 +34,7 @@ public class AiPlayer {
             }
             if (v == 1) break;
         }
+
         memo.clear();
         return successor;
     }
@@ -52,18 +57,14 @@ public class AiPlayer {
             for (var i : successors) {
                 best = Math.max(best, alphaBeta(i, a, b, depth - 1, false));
                 a = Math.max(a, best);
-                if (b <= a) {
-                    break;
-                }
+                if (b <= a) break;
             }
         } else {
             best = Integer.MAX_VALUE;
             for (var i : successors) {
                 best = Math.min(best, alphaBeta(i, a, b, depth - 1, true));
                 b = Math.min(b, best);
-                if (b <= a) {
-                    break;
-                }
+                if (b <= a) break;
             }
         }
 

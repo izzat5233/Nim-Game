@@ -19,13 +19,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -61,7 +60,9 @@ public class MapController
 
     Difficulty difficulty;
 
-    int gameRows;
+    int misereGameRows = 7;
+
+    HashMap<Integer, Integer> countMap, rowMap;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -70,17 +71,21 @@ public class MapController
         restartButton.setOnAction(e -> restart());
         pilesContainer.setFillWidth(true);
         pilesContainer.setSpacing(20);
-        // System.out.println("Rows:");
-        // gameRows = new Scanner(System.in).nextInt();
-        gameRows = 5;
+        radioButtonEasy.setOnAction(e -> restart());
+        radioButtonMedium.setOnAction(e -> restart());
+        radioButtonHard.setOnAction(e -> restart());
+        radioButtonPerfect.setOnAction(e -> restart());
+        radioButtonClassic.setOnAction(e -> restart());
+        radioButtonMisere.setOnAction(e -> restart());
         restart();
     }
 
     private void play() {
-        for (int i = 0; i < rows.size(); i++) {
-            var pile = rows.get(i).pile;
-            if (pile.getSelectedAmount() > 0) {
-                gameFlow.play(new Move(i, pile.getSelectedAmount()));
+        for (var row : rows) {
+            var i = row.pile.getSelectedAmount();
+            if (i > 0) {
+                var j = rowMap.get(row.pile.getAmount());
+                gameFlow.play(new Move(j, i));
                 break;
             }
         }
@@ -88,7 +93,7 @@ public class MapController
 
     private Position miserePosition() {
         var counts = new ArrayList<Integer>();
-        for (int i = 0; i < gameRows; i++) counts.add(2 * i + 1);
+        for (int i = 0; i < misereGameRows; i++) counts.add(2 * i + 1);
         return new MiserePosition(counts);
     }
 
@@ -121,14 +126,24 @@ public class MapController
         }
     }
 
+    private void processGame() {
+        countMap = new HashMap<>();
+        rowMap = new HashMap<>();
+        var counts = gameFlow.getGame().getPosition().getCounts();
+        for (int i = 0; i < counts.size(); i++) {
+            var pile = counts.get(i);
+            rowMap.putIfAbsent(pile, i);
+            countMap.put(pile, countMap.getOrDefault(pile, 0) + 1);
+        }
+    }
+
     private void displayGame() {
+        processGame();
         rows = new ArrayList<>();
-        var position = gameFlow.getGame().getPosition();
-        for (var count : position.getCounts()) {
-            var pile = new Pile(new FlowPane(), stoneImage, count);
+        for (var i : countMap.keySet()) {
+            var pile = new Pile(new FlowPane(), stoneImage, i);
             pile.subscribe(this);
-            var row = new Row(pile);
-            rows.add(row);
+            rows.add(new Row(pile, countMap.get(i)));
         }
         pilesContainer.getChildren().setAll(rows);
     }
@@ -146,21 +161,18 @@ public class MapController
         displayGame();
     }
 
-    static class Row extends HBox
-            implements PileSelectionListener {
+    static class Row extends HBox {
         final Pile pile;
-        final Label counter;
+        final Label label = new Label();
 
-        Row(Pile pile) {
+        Row(Pile pile, int count) {
             this.pile = pile;
-            this.pile.subscribe(this);
-            this.counter = new Label("Selected: 0");
-            getChildren().addAll(pile.getPane());
-        }
-
-        @Override
-        public void onPileSelectionChange(Pile pile) {
-            counter.setText("Selected: " + pile.getSelectedAmount());
+            label.setStyle("-fx-font-weight: bold; -fx-label-padding: 5; -fx-text-fill: black");
+            label.setMaxWidth(Double.MAX_VALUE);
+            label.setFont(Font.font("Cambria", 20));
+            if (count > 1) label.setText(String.valueOf(count));
+            getChildren().addAll(label, pile.getPane());
+            HBox.setHgrow(label, Priority.ALWAYS);
         }
     }
 }

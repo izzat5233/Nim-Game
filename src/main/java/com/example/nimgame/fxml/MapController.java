@@ -10,6 +10,7 @@ import com.example.nimgame.game.StatusListener;
 import com.example.nimgame.game.ai.AiPlayer;
 import com.example.nimgame.game.ai.Difficulty;
 import com.example.nimgame.game.flow.AiGameFlow;
+import com.example.nimgame.game.position.ClassicPosition;
 import com.example.nimgame.game.position.MiserePosition;
 import com.example.nimgame.game.position.Position;
 import javafx.fxml.FXML;
@@ -25,6 +26,7 @@ import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MapController
@@ -43,7 +45,13 @@ public class MapController
     public Label labelPlayerTurn;
 
     @FXML
-    public RadioButton radioButtonEasy, radioButtonMedium, radioButtonHard, radioButtonPerfect;
+    public RadioButton
+            radioButtonEasy,
+            radioButtonMedium,
+            radioButtonHard,
+            radioButtonPerfect,
+            radioButtonClassic,
+            radioButtonMisere;
 
     ArrayList<Row> rows;
 
@@ -78,14 +86,20 @@ public class MapController
         }
     }
 
-    private Position position() {
+    private Position miserePosition() {
         var counts = new ArrayList<Integer>();
         for (int i = 0; i < gameRows; i++) counts.add(2 * i + 1);
         return new MiserePosition(counts);
     }
 
+    private Position classicPosition() {
+        var counts = new ArrayList<>(List.of(15));
+        return new ClassicPosition(counts);
+    }
+
     private AiGameFlow gameFlow() {
-        return new AiGameFlow(new Game(position()), new AiPlayer(difficulty));
+        var position = radioButtonClassic.isSelected() ? classicPosition() : miserePosition();
+        return new AiGameFlow(new Game(position), new AiPlayer(difficulty));
     }
 
     private void restart() {

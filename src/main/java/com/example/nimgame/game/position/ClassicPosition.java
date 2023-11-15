@@ -19,7 +19,7 @@ public class ClassicPosition extends Position {
     @Override
     public boolean isAllowed(Move move) {
         if (move.row() < 0 || move.row() >= counts.size()) return false;
-        if (move.amount() <= 0) return false;
+        if (move.amount() <= 0 || move.amount() >= counts.get(move.row())) return false;
         return 2 * move.amount() != counts.get(move.row());
     }
 
@@ -35,11 +35,18 @@ public class ClassicPosition extends Position {
 
     @Override
     public List<Position> getAllSuccessors() {
-        return null;
+        var successors = new ArrayList<Position>();
+        for (int i = 0; i < counts.size(); i++) {
+            for (int j = 1; j <= (counts.size() + 1) / 2; j++) {
+                var optional = getSuccessor(new Move(i, j));
+                optional.ifPresent(successors::add);
+            }
+        }
+        return successors;
     }
 
     @Override
     public int getHeuristicValue(boolean maximizing) {
-        return 0;
+        return getAllSuccessors().isEmpty() ? maximizing ? 1 : -1 : 0;
     }
 }

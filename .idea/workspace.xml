@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78e009c0-4cbc-4598-98db-2e788037eb2f" name="Changes" comment="Prepared Classic version of the game along with Misère version.">
+    <list default="true" id="78e009c0-4cbc-4598-98db-2e788037eb2f" name="Changes" comment="Hashcode fix in Position class.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/ai/AiPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/ai/AiPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/position/MiserePosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/position/MiserePosition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/position/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/position/Position.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/fxml/MapController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/fxml/MapController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/position/ClassicPosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/position/ClassicPosition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/fxml/map.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/fxml/map.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +94,8 @@
       <workItem from="1699821321252" duration="808000" />
       <workItem from="1699873667490" duration="14332000" />
       <workItem from="1699901136533" duration="1716000" />
-      <workItem from="1699983328575" duration="21890000" />
+      <workItem from="1699983328575" duration="22690000" />
+      <workItem from="1700049696923" duration="2454000" />
     </task>
     <task id="LOCAL-00001" summary="Added GameFlow and UI difficulty options.">
       <option name="closed" value="true" />
@@ -128,7 +129,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700008444121</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Hashcode fix in Position class.">
+      <option name="closed" value="true" />
+      <created>1700009418644</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1700009418644</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,6 +159,7 @@
     <MESSAGE value="Updated 'Game' structure." />
     <MESSAGE value="Added background &amp; updated the design." />
     <MESSAGE value="Prepared Classic version of the game along with Misère version." />
-    <option name="LAST_COMMIT_MESSAGE" value="Prepared Classic version of the game along with Misère version." />
+    <MESSAGE value="Hashcode fix in Position class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Hashcode fix in Position class." />
   </component>
 </project>

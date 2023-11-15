@@ -3,6 +3,7 @@ package com.example.nimgame.game.position;
 import com.example.nimgame.game.Move;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public abstract class Position {
@@ -33,5 +34,17 @@ public abstract class Position {
 
     public abstract List<Position> getAllSuccessors();
 
-    public abstract int getHeuristicValue(boolean firstPlayerIsMaximum);
+    public abstract int getHeuristicValue(boolean maximizing);
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Position that)) return false;
+        return that.firstPlayerTurn == firstPlayerTurn && that.counts.equals(counts);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(counts, firstPlayerTurn);
+    }
 }

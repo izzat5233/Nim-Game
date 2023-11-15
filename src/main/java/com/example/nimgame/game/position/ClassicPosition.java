@@ -39,7 +39,7 @@ public class ClassicPosition extends Position {
     }
 
     @Override
-    public int getHeuristicValue(boolean firstPlayerIsMaximum) {
+    public int getHeuristicValue(boolean maximizing) {
         return 0;
     }
 }

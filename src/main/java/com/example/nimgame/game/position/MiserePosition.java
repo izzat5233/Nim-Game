@@ -46,16 +46,12 @@ public class MiserePosition extends Position {
     }
 
     @Override
-    public int getHeuristicValue(boolean firstPlayerIsMaximum) {
-        var maximizing = (firstPlayerIsMaximum == firstPlayerTurn);
+    public int getHeuristicValue(boolean maximizing) {
         int res = maximizing ? 1 : -1;
+        if (counts.stream().allMatch(i -> i == 0)) return res;
 
-        if (counts.stream().allMatch(i -> i == 0)) {
-            return res;
-        }
-
-        int pilesWithMoreThanOne = (int) counts.stream().filter(i -> i > 1).count();
         // Endgame
+        int pilesWithMoreThanOne = (int) counts.stream().filter(i -> i > 1).count();
         if (pilesWithMoreThanOne == 1) {
             return firstPlayerTurn ? -res : res;
         }

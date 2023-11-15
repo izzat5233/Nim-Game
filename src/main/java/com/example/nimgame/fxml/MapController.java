@@ -3,12 +3,15 @@ package com.example.nimgame.fxml;
 import com.example.nimgame.Launcher;
 import com.example.nimgame.fxml.object.Pile;
 import com.example.nimgame.fxml.object.PileSelectionListener;
-import com.example.nimgame.game.flow.AiFlow;
 import com.example.nimgame.game.Game;
+import com.example.nimgame.game.Move;
 import com.example.nimgame.game.Status;
 import com.example.nimgame.game.StatusListener;
 import com.example.nimgame.game.ai.AiPlayer;
 import com.example.nimgame.game.ai.Difficulty;
+import com.example.nimgame.game.flow.AiGameFlow;
+import com.example.nimgame.game.position.MiserePosition;
+import com.example.nimgame.game.position.Position;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -16,8 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -46,7 +49,7 @@ public class MapController
 
     Image stoneImage;
 
-    AiFlow gameFlow;
+    AiGameFlow gameFlow;
 
     Difficulty difficulty;
 
@@ -69,15 +72,25 @@ public class MapController
         for (int i = 0; i < rows.size(); i++) {
             var pile = rows.get(i).pile;
             if (pile.getSelectedAmount() > 0) {
-                gameFlow.play(i, pile.getSelectedAmount());
+                gameFlow.play(new Move(i, pile.getSelectedAmount()));
                 break;
             }
         }
     }
 
+    private Position position() {
+        var counts = new ArrayList<Integer>();
+        for (int i = 0; i < gameRows; i++) counts.add(2 * i + 1);
+        return new MiserePosition(counts);
+    }
+
+    private AiGameFlow gameFlow() {
+        return new AiGameFlow(new Game(position()), new AiPlayer(difficulty));
+    }
+
     private void restart() {
         setDifficulty();
-        gameFlow = new AiFlow(new Game(gameRows), new AiPlayer(difficulty));
+        gameFlow = gameFlow();
         gameFlow.getGame().subscribe(this);
         displayGame();
     }
@@ -96,9 +109,9 @@ public class MapController
 
     private void displayGame() {
         rows = new ArrayList<>();
-        var state = gameFlow.getGame().getPosition();
-        for (var count : state.getCounts()) {
-            var pile = new Pile(new HBox(), stoneImage, count);
+        var position = gameFlow.getGame().getPosition();
+        for (var count : position.getCounts()) {
+            var pile = new Pile(new FlowPane(), stoneImage, count);
             pile.subscribe(this);
             var row = new Row(pile);
             rows.add(row);

@@ -1,37 +1,17 @@
 package com.example.nimgame.game.ai;
 
-import com.example.nimgame.game.Position;
+import com.example.nimgame.game.position.Position;
 
 import java.util.HashMap;
 import java.util.Random;
 
 public class AiPlayer {
-    private final HashMap<State, Integer> memo = new HashMap<>();
+    private final HashMap<Position, Integer> memo = new HashMap<>();
 
     private final Difficulty difficulty;
 
     public AiPlayer(Difficulty difficulty) {
         this.difficulty = difficulty;
-    }
-
-    private static int getHeuristicValue(State state) {
-        var maximizing = state.maximizing();
-        var counts = state.position().getCounts();
-
-        int res = maximizing ? 1 : -1;
-        if (counts.stream().allMatch(i -> i == 0)) {
-            return res;
-        }
-
-        int pilesWithMoreThanOne = (int) counts.stream().filter(i -> i > 1).count();
-        // Endgame
-        if (pilesWithMoreThanOne == 1) {
-            return state.position().isFirstPlayerTurn() ? -res : res;
-        }
-
-        // Mid-game
-        int oddCountPiles = (int) counts.stream().filter(i -> i % 2 == 1).count();
-        return oddCountPiles % 2 == 0 ? -res : res;
     }
 
     public Position getSuccessor(Position position) {
@@ -61,11 +41,10 @@ public class AiPlayer {
     }
 
     private int alphaBeta(Position position, int a, int b, int depth, boolean maximizing) {
-        var pair = new State(position, maximizing);
         var successors = position.getAllSuccessors();
 
-        if (memo.containsKey(pair)) return memo.get(pair);
-        if (depth == 0 || successors.isEmpty()) return getHeuristicValue(pair);
+        if (memo.containsKey(position)) return memo.get(position);
+        if (depth == 0 || successors.isEmpty()) return position.getHeuristicValue(maximizing);
 
         int best;
         if (maximizing) {
@@ -88,7 +67,7 @@ public class AiPlayer {
             }
         }
 
-        memo.put(pair, best);
+        memo.put(position, best);
         return best;
     }
 }

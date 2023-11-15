@@ -3,18 +3,18 @@ package com.example.nimgame.game.flow;
 import com.example.nimgame.game.Game;
 import com.example.nimgame.game.Status;
 import com.example.nimgame.game.StatusListener;
-import com.example.nimgame.game.Position;
+import com.example.nimgame.game.position.Position;
 import com.example.nimgame.game.ai.AiPlayer;
 import javafx.concurrent.Task;
 
-public class AiFlow extends GameFlow
+public class AiGameFlow extends GameFlow
         implements StatusListener {
 
     private static final long MINIMUM_DELAY_TIME = 1000;
 
     private final AiPlayer player;
 
-    public AiFlow(Game game, AiPlayer player) {
+    public AiGameFlow(Game game, AiPlayer player) {
         super(game);
         this.player = player;
         game.subscribe(this);

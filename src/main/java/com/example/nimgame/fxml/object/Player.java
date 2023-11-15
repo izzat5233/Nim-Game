@@ -3,13 +3,11 @@ package com.example.nimgame.object;
 public class Player {
     private String playerName;
 
-
-
-
-    public void setName(String name){
+    public void setName(String name) {
         playerName = name;
     }
-    public String getName(){
+
+    public String getName() {
         return playerName;
     }
 }

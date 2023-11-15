@@ -11,8 +11,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
-
 public class MenuController {
     @FXML
     public ImageView imageButtonSinglePlayer, imageButtonMultiPlayer;

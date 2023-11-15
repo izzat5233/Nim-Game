@@ -1,5 +1,7 @@
 package com.example.nimgame.game;
 
+import com.example.nimgame.game.position.Position;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +16,8 @@ public class Game {
 
     protected final ArrayList<StatusListener> statusListeners = new ArrayList<>();
 
-    public Game(int rows) {
-        var counts = new ArrayList<Integer>();
-        for (int i = 0; i < rows; i++) counts.add(2 * i + 1);
-        var state = new Position(counts);
-        move(state, Status.FIRST_PLAYER_TURN);
+    public Game(Position initialPosition) {
+        set(initialPosition, Status.FIRST_PLAYER_TURN);
     }
 
     protected void notifyStatusListeners() {
@@ -57,7 +56,7 @@ public class Game {
         frozen = false;
     }
 
-    public void move(Position newPosition, Status newStatus) {
+    public void set(Position newPosition, Status newStatus) {
         if (frozen) return;
         if (position != newPosition) {
             position = newPosition;

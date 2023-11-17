@@ -47,17 +47,13 @@ public class MiserePosition extends Position {
 
     @Override
     public int getHeuristicValue(boolean maximizing) {
-        int res = maximizing ? 1 : -1;
-        if (counts.stream().allMatch(i -> i == 0)) return res;
+        int h = maximizing ? 1 : -1;
+        if (counts.stream().allMatch(i -> i == 0)) return 2 * h;
 
-        // Endgame
-        int pilesWithMoreThanOne = (int) counts.stream().filter(i -> i > 1).count();
-        if (pilesWithMoreThanOne == 1) {
-            return firstPlayerTurn ? -res : res;
-        }
+        boolean isEndgame = counts.stream().filter(c -> c > 1).count() <= 1;
+        if (!isEndgame) return nimSum() == 0 ? -h : h;
 
-        // Mid-game
-        int oddCountPiles = (int) counts.stream().filter(i -> i % 2 == 1).count();
-        return oddCountPiles % 2 == 0 ? -res : res;
+        int singlePiles = (int) counts.stream().filter(c -> c == 1).count();
+        return singlePiles % 2 == 0 ? -h : h;
     }
 }

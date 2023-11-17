@@ -2,9 +2,7 @@ package com.example.nimgame.game.position;
 
 import com.example.nimgame.game.Move;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public abstract class Position {
     protected final List<Integer> counts;
@@ -26,6 +24,10 @@ public abstract class Position {
 
     public List<Integer> getCounts() {
         return counts;
+    }
+
+    protected int nimSum() {
+        return counts.stream().reduce(0, (a, b) -> a ^ b);
     }
 
     public abstract boolean isAllowed(Move move);

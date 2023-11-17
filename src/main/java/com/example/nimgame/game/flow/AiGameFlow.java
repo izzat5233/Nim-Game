@@ -33,6 +33,7 @@ public class AiGameFlow extends GameFlow
                 long t1 = System.currentTimeMillis();
                 var successor = player.getSuccessor(game.getPosition());
                 long t2 = System.currentTimeMillis() - t1;
+                System.out.println("AI move calculation time: " + t2 + " ms");
 
                 try {
                     var delay = player.getDifficulty().getMinimumDelayTime();

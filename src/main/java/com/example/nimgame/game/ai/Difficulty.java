@@ -1,6 +1,7 @@
 package com.example.nimgame.game.ai;
 
 public enum Difficulty {
+    NONE(true, 0, 0),
     EASY(true, 0, 200),
     MEDIUM(false, 0, 400),
     HARD(false, 4, 600),

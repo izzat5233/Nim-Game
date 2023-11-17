@@ -2,10 +2,11 @@ package com.example.nimgame.game.ai;
 
 import com.example.nimgame.game.position.Position;
 
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 public class AiPlayer {
+    private Random random = null;
+
     private final HashMap<Position, Integer> memo = new HashMap<>();
 
     private final Difficulty difficulty;
@@ -19,11 +20,8 @@ public class AiPlayer {
     }
 
     public Position getSuccessor(Position position) {
-        if (difficulty.isRandom()) {
-            return randomSuccessor(position);
-        }
+        if (difficulty.isRandom()) return randomSuccessor(position);
 
-        memo.clear();
         int best = Integer.MIN_VALUE;
         Position successor = null;
         for (var i : position.getAllSuccessors()) {
@@ -32,21 +30,18 @@ public class AiPlayer {
                 best = v;
                 successor = i;
             }
-            if (v == 1) break;
         }
-
-        memo.clear();
         return successor;
     }
 
     private Position randomSuccessor(Position position) {
-        var random = new Random(System.nanoTime());
+        if (random == null) random = new Random(System.nanoTime());
         var successors = position.getAllSuccessors();
         return successors.get(random.nextInt(successors.size()));
     }
 
     private int alphaBeta(Position position, int a, int b, int depth, boolean maximizing) {
-        var successors = position.getAllSuccessors();
+        var successors = new ArrayList<>(position.getAllSuccessors());
 
         if (memo.containsKey(position)) return memo.get(position);
         if (depth == 0 || successors.isEmpty()) return position.getHeuristicValue(maximizing);
@@ -54,6 +49,7 @@ public class AiPlayer {
         int best;
         if (maximizing) {
             best = Integer.MIN_VALUE;
+            // successors.sort(Comparator.comparingInt(o -> o.getHeuristicValue(false)));
             for (var i : successors) {
                 best = Math.max(best, alphaBeta(i, a, b, depth - 1, false));
                 a = Math.max(a, best);
@@ -61,6 +57,7 @@ public class AiPlayer {
             }
         } else {
             best = Integer.MAX_VALUE;
+            // successors.sort(Comparator.comparingInt(o -> o.getHeuristicValue(true)));
             for (var i : successors) {
                 best = Math.min(best, alphaBeta(i, a, b, depth - 1, true));
                 b = Math.min(b, best);

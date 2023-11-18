@@ -1,6 +1,6 @@
 package com.example.nimgame.fxml;
 
-import com.example.nimgame.game.ai.Difficulty;
+import com.example.nimgame.game.player.Difficulty;
 import com.example.nimgame.game.position.Version;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,7 +27,8 @@ public class MapController
 
     @FXML
     public AnchorPane
-            mapRoot,
+            rootPane,
+            headerPane,
             abFreePlay,
             abEasy,
             abMedium,
@@ -54,6 +56,8 @@ public class MapController
 
     GameController gameController;
 
+    double xOffset, yOffset;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         pilesContainer.setFillWidth(true);
@@ -63,6 +67,17 @@ public class MapController
         ibExit.setOnMouseClicked(e -> Platform.exit());
         difficultyGroup = new RadioGroup(e -> setDifficulty(), abFreePlay, abEasy, abMedium, abHard, abPerfect);
         versionGroup = new RadioGroup(e -> setVersion(), abClassic, abMisere);
+    }
+
+    public void initMouseDragging(Stage stage) {
+        headerPane.setOnMousePressed(event -> {
+            xOffset = stage.getX() - event.getScreenX();
+            yOffset = stage.getY() - event.getScreenY();
+        });
+        headerPane.setOnMouseDragged(event -> {
+            stage.setX(event.getScreenX() + xOffset);
+            stage.setY(event.getScreenY() + yOffset);
+        });
     }
 
     private void setDifficulty() {

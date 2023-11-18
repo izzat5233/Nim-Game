@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane fx:id="mapRoot" prefHeight="661.0" prefWidth="622.0" style="-fx-background-color: #333;" stylesheets="@../styles/globals.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nimgame.fxml.MapController">
+<AnchorPane fx:id="rootPane" prefHeight="661.0" prefWidth="622.0" style="-fx-background-color: #333;" stylesheets="@../styles/globals.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nimgame.fxml.MapController">
     <children>
         <ImageView fitHeight="935.0" fitWidth="926.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -135,20 +135,24 @@
             <Line endX="123.0" layoutX="55.0" layoutY="74.0" startX="-40.0" />
             </children>
         </AnchorPane>
-      <ImageView fx:id="ibExit" fitHeight="46.0" fitWidth="43.0" layoutX="858.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/icons/Icon_X.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="133.0" fitWidth="131.0" layoutX="21.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/texts/Nim.png" />
-         </image>
-      </ImageView>
       <ImageView fx:id="ibStart" fitHeight="97.0" fitWidth="77.0" layoutX="444.0" layoutY="781.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/icons/Icon_Tube.png" />
          </image>
       </ImageView>
+      <AnchorPane fx:id="headerPane" prefHeight="153.0" prefWidth="926.0">
+         <children>
+            <ImageView fitHeight="133.0" fitWidth="131.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/texts/Nim.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="ibExit" fitHeight="46.0" fitWidth="43.0" layoutX="857.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/icons/Icon_X.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>

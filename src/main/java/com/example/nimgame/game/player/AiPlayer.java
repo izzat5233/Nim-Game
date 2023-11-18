@@ -1,31 +1,30 @@
-package com.example.nimgame.game.ai;
+package com.example.nimgame.game.player;
 
 import com.example.nimgame.game.position.Position;
 
 import java.util.*;
 
-public class AiPlayer {
-    private Random random = null;
+public class AiPlayer
+        implements Player {
 
     private final HashMap<Position, Integer> memo = new HashMap<>();
 
-    private final Difficulty difficulty;
+    private final AiParameters parameters;
 
-    public AiPlayer(Difficulty difficulty) {
-        this.difficulty = difficulty;
+    AiPlayer(AiParameters parameters) {
+        this.parameters = parameters;
     }
 
-    public Difficulty getDifficulty() {
-        return difficulty;
+    public AiParameters parameters() {
+        return parameters;
     }
 
+    @Override
     public Position getSuccessor(Position position) {
-        if (difficulty.isRandom()) return randomSuccessor(position);
-
         int best = Integer.MIN_VALUE;
         Position successor = null;
         for (var i : position.getAllSuccessors()) {
-            int v = alphaBeta(i, Integer.MIN_VALUE, Integer.MAX_VALUE, difficulty.getSearchDepth(), false);
+            int v = alphaBeta(i, Integer.MIN_VALUE, Integer.MAX_VALUE, parameters().searchDepth(), false);
             if (v > best) {
                 best = v;
                 successor = i;
@@ -34,10 +33,9 @@ public class AiPlayer {
         return successor;
     }
 
-    private Position randomSuccessor(Position position) {
-        if (random == null) random = new Random(System.nanoTime());
-        var successors = position.getAllSuccessors();
-        return successors.get(random.nextInt(successors.size()));
+    @Override
+    public long getMinimumDelayTime() {
+        return parameters.minimumDelayTime();
     }
 
     private int alphaBeta(Position position, int a, int b, int depth, boolean maximizing) {

@@ -3,40 +3,40 @@ package com.example.nimgame.game.flow;
 import com.example.nimgame.game.Game;
 import com.example.nimgame.game.Status;
 import com.example.nimgame.game.StatusListener;
+import com.example.nimgame.game.player.Player;
 import com.example.nimgame.game.position.Position;
-import com.example.nimgame.game.ai.AiPlayer;
 import javafx.concurrent.Task;
 
-public class AiGameFlow extends GameFlow
+public class AutoGameFlow extends GameFlow
         implements StatusListener {
 
-    private final AiPlayer player;
+    private final Player player;
 
     private final Status playOnStatus;
 
-    public AiGameFlow(Game game, AiPlayer player, boolean isAiSecondPlayer) {
+    public AutoGameFlow(Game game, Player player, boolean isAutoPlayerSecondPlayer) {
         super(game);
         game.subscribe(this);
         this.player = player;
-        this.playOnStatus = isAiSecondPlayer ?
+        this.playOnStatus = isAutoPlayerSecondPlayer ?
                 Status.SECOND_PLAYER_TURN : Status.FIRST_PLAYER_TURN;
     }
 
-    public AiGameFlow(Game game, AiPlayer player) {
+    public AutoGameFlow(Game game, Player player) {
         this(game, player, true);
     }
 
-    public Task<Position> createAiTask() {
+    public Task<Position> createTask() {
         return new Task<>() {
             @Override
             protected Position call() {
                 long t1 = System.currentTimeMillis();
                 var successor = player.getSuccessor(game.getPosition());
                 long t2 = System.currentTimeMillis() - t1;
-                System.out.println("AI move calculation time: " + t2 + " ms");
+                System.out.println("Move calculation time: " + t2 + " ms");
 
                 try {
-                    var delay = player.getDifficulty().getMinimumDelayTime();
+                    var delay = player.getMinimumDelayTime();
                     Thread.sleep(Math.max(delay - t2, 0));
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
@@ -51,7 +51,7 @@ public class AiGameFlow extends GameFlow
     public void onStatusChange(Status status) {
         if (status == playOnStatus) {
             game.freeze();
-            var task = createAiTask();
+            var task = createTask();
             task.setOnSucceeded(e -> {
                 var successor = task.getValue();
                 game.unfreeze();

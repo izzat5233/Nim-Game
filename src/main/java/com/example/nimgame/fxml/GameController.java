@@ -3,14 +3,12 @@ package com.example.nimgame.fxml;
 import com.example.nimgame.Launcher;
 import com.example.nimgame.fxml.object.Pile;
 import com.example.nimgame.fxml.object.PileSelectionListener;
-import com.example.nimgame.game.Game;
-import com.example.nimgame.game.Move;
-import com.example.nimgame.game.Status;
-import com.example.nimgame.game.StatusListener;
-import com.example.nimgame.game.ai.AiPlayer;
-import com.example.nimgame.game.ai.Difficulty;
-import com.example.nimgame.game.flow.AiGameFlow;
+import com.example.nimgame.game.*;
+import com.example.nimgame.game.player.AiPlayer;
+import com.example.nimgame.game.player.Difficulty;
+import com.example.nimgame.game.flow.AutoGameFlow;
 import com.example.nimgame.game.flow.GameFlow;
+import com.example.nimgame.game.player.PlayerFactory;
 import com.example.nimgame.game.position.ClassicPosition;
 import com.example.nimgame.game.position.MiserePosition;
 import com.example.nimgame.game.position.Position;
@@ -25,7 +23,7 @@ import java.util.List;
 public class GameController
         implements PileSelectionListener, StatusListener {
 
-    private static final Image ITEM_IMAGE =
+    public static final Image ITEM_IMAGE =
             new Image(String.valueOf(Launcher.class.getResource("assets/items/stone1.png")));
 
     private static final int misereGameRows = 4;
@@ -63,14 +61,7 @@ public class GameController
     }
 
     private void initialize() {
-        var pos = version == Version.MISERE ? getMiserePosition() : getClassicPosition();
-        var game = new Game(pos);
-        game.subscribe(this);
-        if (difficulty == Difficulty.NONE) {
-            gameFlow = new GameFlow(game);
-        } else {
-            gameFlow = new AiGameFlow(game, new AiPlayer(difficulty));
-        }
+        gameFlow = GameFactory.start(difficulty, version, this);
     }
 
     private void display() {
@@ -92,17 +83,6 @@ public class GameController
                 break;
             }
         }
-    }
-
-    private Position getMiserePosition() {
-        var counts = new ArrayList<Integer>();
-        for (int i = 0; i < misereGameRows; i++) counts.add(2 * i + 1);
-        return new MiserePosition(counts);
-    }
-
-    private Position getClassicPosition() {
-        var counts = new ArrayList<>(List.of(15));
-        return new ClassicPosition(counts);
     }
 
     @Override

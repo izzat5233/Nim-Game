@@ -4,41 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78e009c0-4cbc-4598-98db-2e788037eb2f" name="Changes" comment="Added count map to fit more rows.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/fxml/GameController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/position/Version.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/icons/Icon_Add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/icons/Icon_Check.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/icons/Icon_Play.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/icons/Icon_SquareStraight.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/icons/Icon_Tube.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/icons/Icon_X.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Classic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Computer-Wins.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Difficulty.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Easy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Free-Play.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Hard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Medium.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Misere.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Move.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Nim.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Perfect.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Play.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Player-1-Wins.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Player-2-Wins.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Restart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Start.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Version.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/You-Win.png" afterDir="false" />
+    <list default="true" id="78e009c0-4cbc-4598-98db-2e788037eb2f" name="Changes" comment="Updated the design with new assets. Created GameController.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/fxml/MapController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/fxml/MapController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/ai/AiPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/ai/AiPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/ai/Difficulty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/ai/Difficulty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/flow/AiGameFlow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/flow/AiGameFlow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/position/MiserePosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/position/MiserePosition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/position/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/position/Position.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/fxml/map.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/fxml/map.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +103,7 @@
       <workItem from="1700142688491" duration="608000" />
       <workItem from="1700219709529" duration="4772000" />
       <workItem from="1700244955801" duration="3757000" />
-      <workItem from="1700256382393" duration="7158000" />
+      <workItem from="1700256382393" duration="8029000" />
     </task>
     <task id="LOCAL-00001" summary="Added GameFlow and UI difficulty options.">
       <option name="closed" value="true" />
@@ -193,7 +161,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700057857319</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Updated the design with new assets. Created GameController.">
+      <option name="closed" value="true" />
+      <created>1700265552666</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1700265552666</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,6 +194,7 @@
     <MESSAGE value="Hashcode fix in Position class." />
     <MESSAGE value="Added Classic version UI option." />
     <MESSAGE value="Added count map to fit more rows." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added count map to fit more rows." />
+    <MESSAGE value="Updated the design with new assets. Created GameController." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated the design with new assets. Created GameController." />
   </component>
 </project>

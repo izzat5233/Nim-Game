@@ -68,7 +68,9 @@ public class MapController
     private void setDifficulty() {
         var selected = difficultyGroup.selected;
         Difficulty difficulty;
-        if (selected == abEasy) {
+        if (selected == abFreePlay) {
+            difficulty = Difficulty.NONE;
+        } else if (selected == abEasy) {
             difficulty = Difficulty.EASY;
         } else if (selected == abMedium) {
             difficulty = Difficulty.MEDIUM;
@@ -82,13 +84,7 @@ public class MapController
 
     private void setVersion() {
         var selected = versionGroup.selected;
-        Version version;
-        if (selected == abClassic) {
-            version = Version.CLASSIC;
-        } else {
-            version = Version.MISERE;
-        }
-        gameController.setVersion(version);
+        gameController.setVersion(selected == abClassic ? Version.CLASSIC : Version.MISERE);
     }
 
     static class RadioGroup {

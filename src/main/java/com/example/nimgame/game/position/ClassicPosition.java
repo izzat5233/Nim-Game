@@ -47,6 +47,12 @@ public class ClassicPosition extends Position {
 
     @Override
     public int getHeuristicValue(boolean maximizing) {
-        return getAllSuccessors().isEmpty() ? maximizing ? 1 : -1 : 0;
+        int h = maximizing ? 1 : -1;
+
+        int left = (int) counts.stream().filter(i -> i > 2).count();
+        if (left == 0) return Integer.MAX_VALUE * h;
+
+        int nim = (nimSum() == 0 ? -1 : 1) * counts.size() / 2;
+        return (nim + left) * h;
     }
 }

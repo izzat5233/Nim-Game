@@ -39,9 +39,8 @@ public class AiPlayer
     }
 
     private int alphaBeta(Position position, int a, int b, int depth, boolean maximizing) {
-        var successors = new ArrayList<>(position.getAllSuccessors());
-
         if (memo.containsKey(position)) return memo.get(position);
+        var successors = position.getAllSuccessors();
         if (depth == 0 || successors.isEmpty()) return position.getHeuristicValue(maximizing);
 
         int best;

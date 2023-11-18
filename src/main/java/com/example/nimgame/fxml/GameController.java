@@ -3,22 +3,18 @@ package com.example.nimgame.fxml;
 import com.example.nimgame.Launcher;
 import com.example.nimgame.fxml.object.Pile;
 import com.example.nimgame.fxml.object.PileSelectionListener;
-import com.example.nimgame.game.*;
-import com.example.nimgame.game.player.AiPlayer;
-import com.example.nimgame.game.player.Difficulty;
-import com.example.nimgame.game.flow.AutoGameFlow;
+import com.example.nimgame.game.GameFactory;
+import com.example.nimgame.game.Move;
+import com.example.nimgame.game.Status;
+import com.example.nimgame.game.StatusListener;
 import com.example.nimgame.game.flow.GameFlow;
-import com.example.nimgame.game.player.PlayerFactory;
-import com.example.nimgame.game.position.ClassicPosition;
-import com.example.nimgame.game.position.MiserePosition;
-import com.example.nimgame.game.position.Position;
+import com.example.nimgame.game.player.Difficulty;
 import com.example.nimgame.game.position.Version;
 import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class GameController
         implements PileSelectionListener, StatusListener {
@@ -26,9 +22,9 @@ public class GameController
     public static final Image ITEM_IMAGE =
             new Image(String.valueOf(Launcher.class.getResource("assets/items/stone1.png")));
 
-    private static final int misereGameRows = 4;
-
     private final Pane pileContainer;
+
+    private final StatusController statusController;
 
     private Difficulty difficulty;
 
@@ -38,15 +34,17 @@ public class GameController
 
     private ArrayList<Pile> piles;
 
-    public GameController(Pane pileContainer, Difficulty difficulty, Version version) {
+    public GameController(Pane pileContainer, StatusController statusController, Difficulty difficulty, Version version) {
         this.pileContainer = pileContainer;
-        this.difficulty = difficulty;
-        this.version = version;
+        this.statusController = statusController;
+        setDifficulty(difficulty);
+        setVersion(version);
         refresh();
     }
 
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+        statusController.setMultiPlayer(difficulty == Difficulty.NONE);
         refresh();
     }
 
@@ -61,7 +59,8 @@ public class GameController
     }
 
     private void initialize() {
-        gameFlow = GameFactory.start(difficulty, version, this);
+        gameFlow = GameFactory.start(difficulty, version, this, statusController);
+        statusController.setStatus(gameFlow.getGame().getStatus());
     }
 
     private void display() {

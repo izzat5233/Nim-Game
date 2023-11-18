@@ -8,7 +8,7 @@ public interface PositionFactory {
     int MISERE_GAME_ROWS = 5;
 
     static Position getInitialPosition(Version version) {
-        return version == Version.CLASSIC ? getMiserePosition() : getClassicPosition();
+        return version == Version.CLASSIC ? getClassicPosition() : getMiserePosition();
     }
 
     static private Position getMiserePosition() {

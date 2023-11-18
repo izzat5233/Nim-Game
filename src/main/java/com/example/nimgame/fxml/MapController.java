@@ -41,6 +41,7 @@ public class MapController
     public ImageView
             ibStart,
             ibExit,
+            statusImageView,
             abiFreePlay,
             abiEasy,
             abiMedium,
@@ -62,11 +63,14 @@ public class MapController
     public void initialize(URL location, ResourceBundle resources) {
         pilesContainer.setFillWidth(true);
         pilesContainer.setSpacing(20);
-        gameController = new GameController(pilesContainer, Difficulty.EASY, Version.CLASSIC);
+        var statusController = new StatusController(statusImageView, true);
+        gameController = new GameController(pilesContainer, statusController, Difficulty.NONE, Version.CLASSIC);
         ibStart.setOnMouseClicked(e -> gameController.play());
         ibExit.setOnMouseClicked(e -> Platform.exit());
         difficultyGroup = new RadioGroup(e -> setDifficulty(), abFreePlay, abEasy, abMedium, abHard, abPerfect);
         versionGroup = new RadioGroup(e -> setVersion(), abClassic, abMisere);
+        difficultyGroup.select(abFreePlay);
+        versionGroup.select(abClassic);
     }
 
     public void initMouseDragging(Stage stage) {
@@ -103,7 +107,7 @@ public class MapController
     }
 
     static class RadioGroup {
-        final ArrayList<Node> buttons = new ArrayList<>();
+        final ArrayList<Node> panes = new ArrayList<>();
 
         final ColorAdjust brighter = new ColorAdjust(), darker = new ColorAdjust();
 
@@ -111,11 +115,11 @@ public class MapController
 
         AnchorPane selected = null;
 
-        RadioGroup(EventHandler<MouseEvent> onSelection, AnchorPane... buttons) {
-            this.buttons.addAll(List.of(buttons));
+        RadioGroup(EventHandler<MouseEvent> onSelection, AnchorPane... panes) {
+            this.panes.addAll(List.of(panes));
             brighter.setBrightness(0);
             darker.setBrightness(-0.5);
-            for (var pane : buttons) {
+            for (var pane : panes) {
                 var button = new ToggleButton();
                 button.setToggleGroup(group);
                 button.setVisible(false);
@@ -128,6 +132,16 @@ public class MapController
                     selected = pane;
                     onSelection.handle(e);
                 });
+            }
+        }
+
+        void select(AnchorPane pane) {
+            for (var i : pane.getChildren()) {
+                if (i instanceof ToggleButton button) {
+                    button.setSelected(true);
+                    selected = pane;
+                    break;
+                }
             }
         }
     }

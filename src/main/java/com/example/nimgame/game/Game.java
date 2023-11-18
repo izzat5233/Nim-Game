@@ -10,7 +10,7 @@ public class Game {
 
     private List<Position> successors;
 
-    private Status status = Status.GAME_START;
+    private Status status;
 
     private boolean frozen = false;
 

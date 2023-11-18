@@ -1,6 +1,6 @@
 package com.example.nimgame.fxml;
 
-import com.example.nimgame.Launcher;
+import com.example.nimgame.ResourceFactory;
 import com.example.nimgame.fxml.object.Pile;
 import com.example.nimgame.fxml.object.PileSelectionListener;
 import com.example.nimgame.game.GameFactory;
@@ -19,8 +19,7 @@ import java.util.ArrayList;
 public class GameController
         implements PileSelectionListener, StatusListener {
 
-    public static final Image ITEM_IMAGE =
-            new Image(String.valueOf(Launcher.class.getResource("assets/items/stone1.png")));
+    public static final Image ITEM_IMAGE = ResourceFactory.getItemImage("stone1.png");
 
     private final Pane pileContainer;
 

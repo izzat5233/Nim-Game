@@ -28,7 +28,9 @@ public class MapController
     @FXML
     public AnchorPane
             rootPane,
-            headerPane,
+            titlePane,
+            difficultyPane,
+            versionPane,
             abFreePlay,
             abEasy,
             abMedium,
@@ -40,7 +42,8 @@ public class MapController
     @FXML
     public ImageView
             ibStart,
-            ibExit,
+            ibPlay,
+            ibBack,
             statusImageView,
             abiFreePlay,
             abiEasy,
@@ -57,31 +60,43 @@ public class MapController
 
     GameController gameController;
 
-    double xOffset, yOffset;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         pilesContainer.setFillWidth(true);
         pilesContainer.setSpacing(20);
-        var statusController = new StatusController(statusImageView, true);
-        gameController = new GameController(pilesContainer, statusController, Difficulty.NONE, Version.CLASSIC);
-        ibStart.setOnMouseClicked(e -> gameController.play());
-        ibExit.setOnMouseClicked(e -> Platform.exit());
         difficultyGroup = new RadioGroup(e -> setDifficulty(), abFreePlay, abEasy, abMedium, abHard, abPerfect);
         versionGroup = new RadioGroup(e -> setVersion(), abClassic, abMisere);
         difficultyGroup.select(abFreePlay);
         versionGroup.select(abClassic);
+        var statusController = new StatusController(statusImageView, true);
+        gameController = new GameController(pilesContainer, statusController, Difficulty.NONE, Version.CLASSIC);
+        ibStart.setOnMouseClicked(e -> start());
+        ibPlay.setOnMouseClicked(e -> play());
+        ibBack.setOnMouseClicked(e -> back());
+        setGameVisible(false);
     }
 
-    public void initMouseDragging(Stage stage) {
-        headerPane.setOnMousePressed(event -> {
-            xOffset = stage.getX() - event.getScreenX();
-            yOffset = stage.getY() - event.getScreenY();
-        });
-        headerPane.setOnMouseDragged(event -> {
-            stage.setX(event.getScreenX() + xOffset);
-            stage.setY(event.getScreenY() + yOffset);
-        });
+    private void setGameVisible(boolean visible) {
+        statusImageView.setVisible(visible);
+        pilesContainer.setVisible(visible);
+        ibBack.setVisible(visible);
+        ibPlay.setVisible(visible);
+        ibStart.setVisible(!visible);
+        titlePane.setVisible(!visible);
+        difficultyPane.setVisible(!visible);
+        versionPane.setVisible(!visible);
+    }
+
+    private void start() {
+        setGameVisible(true);
+    }
+
+    private void play() {
+        gameController.play();
+    }
+
+    private void back() {
+        setGameVisible(false);
     }
 
     private void setDifficulty() {

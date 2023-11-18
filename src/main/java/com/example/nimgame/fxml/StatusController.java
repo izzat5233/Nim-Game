@@ -1,6 +1,6 @@
 package com.example.nimgame.fxml;
 
-import com.example.nimgame.Launcher;
+import com.example.nimgame.ResourceFactory;
 import com.example.nimgame.game.Status;
 import com.example.nimgame.game.StatusListener;
 import javafx.scene.image.Image;
@@ -33,7 +33,7 @@ public class StatusController
 
     public void setStatus(Status status) {
         var key = imageName(status);
-        images.putIfAbsent(key, loadImage(key));
+        images.putIfAbsent(key, ResourceFactory.getTextImage(key));
         this.statusImageView.setImage(images.get(key));
     }
 
@@ -45,9 +45,5 @@ public class StatusController
             case SECOND_PLAYER_WON -> isMultiPlayer ? "Player-2-Wins" : "Computer-Wins";
             case MOVE_NOT_ALLOWED -> "Not-Allowed";
         } + ".png";
-    }
-
-    private Image loadImage(String imageName) {
-        return new Image(String.valueOf(Launcher.class.getResource("assets/texts/" + imageName)));
     }
 }

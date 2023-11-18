@@ -1,8 +1,8 @@
 package com.example.nimgame.fxml;
 
 import com.example.nimgame.game.player.Difficulty;
+import com.example.nimgame.game.position.PositionFactory;
 import com.example.nimgame.game.position.Version;
-import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,12 +15,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class MapController
         implements Initializable {
@@ -44,6 +44,7 @@ public class MapController
             ibStart,
             ibPlay,
             ibBack,
+            ibSettings,
             statusImageView,
             abiFreePlay,
             abiEasy,
@@ -73,6 +74,7 @@ public class MapController
         ibStart.setOnMouseClicked(e -> start());
         ibPlay.setOnMouseClicked(e -> play());
         ibBack.setOnMouseClicked(e -> back());
+        ibSettings.setOnMouseClicked(e -> settings());
         setGameVisible(false);
     }
 
@@ -94,6 +96,12 @@ public class MapController
 
     private void play() {
         gameController.play();
+    }
+
+    private void settings() {
+        System.out.println("Enter number of rows:");
+        var rows = new Scanner(System.in).nextInt();
+        PositionFactory.setRows(rows);
     }
 
     private void back() {

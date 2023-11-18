@@ -88,6 +88,7 @@ public class MapController
     }
 
     private void start() {
+        gameController.refresh();
         setGameVisible(true);
     }
 

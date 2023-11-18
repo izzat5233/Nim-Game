@@ -21,6 +21,7 @@ public class AiPlayer
 
     @Override
     public Position getSuccessor(Position position) {
+        memo.clear();
         int best = Integer.MIN_VALUE;
         Position successor = null;
         for (var i : position.getAllSuccessors()) {
@@ -30,6 +31,7 @@ public class AiPlayer
                 successor = i;
             }
         }
+        memo.clear();
         return successor;
     }
 

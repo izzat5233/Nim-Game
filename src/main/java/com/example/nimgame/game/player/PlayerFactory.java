@@ -1,12 +1,33 @@
 package com.example.nimgame.game.player;
 
-public interface PlayerFactory {
+import com.example.nimgame.game.position.Version;
 
-    static Player usePlayer(Difficulty difficulty) {
-        return difficulty.defaultPlayer();
+import java.util.HashMap;
+
+public final class PlayerFactory {
+
+    private PlayerFactory() {
     }
 
-    static Player customAiPlayer(AiParameters parameters) {
+    private record PlayerKey(
+            Difficulty difficulty,
+            Version version
+    ) {
+    }
+
+    private static final HashMap<PlayerKey, Player> players = new HashMap<>();
+
+    public static Player usePlayer(Difficulty difficulty, Version version) {
+        var key = new PlayerKey(difficulty, version);
+        players.putIfAbsent(key, difficulty.getDefaultPlayer());
+        return players.get(key);
+    }
+
+    public static AiPlayer newAiPlayer(AiParameters parameters) {
         return new AiPlayer(parameters);
+    }
+
+    public static RandomPlayer newRandomPlayer() {
+        return new RandomPlayer();
     }
 }

@@ -7,14 +7,7 @@ public enum Difficulty {
     HARD,
     PERFECT;
 
-    private Player player;
-
-    synchronized Player defaultPlayer() {
-        if (player == null) player = createPlayer();
-        return player;
-    }
-
-    private Player createPlayer() {
+    Player getDefaultPlayer() {
         return switch (this) {
             case NONE -> null;
             case EASY -> new RandomPlayer();

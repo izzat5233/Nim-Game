@@ -15,17 +15,17 @@ public interface GameFactory {
         return game;
     }
 
-    static GameFlow start(Difficulty difficulty, Game game) {
+    static GameFlow start(Difficulty difficulty, Version version, Game game) {
         if (difficulty == Difficulty.NONE) {
             return new GameFlow(game);
         } else {
-            var player = PlayerFactory.usePlayer(difficulty);
+            var player = PlayerFactory.usePlayer(difficulty, version);
             return new AutoGameFlow(game, player);
         }
     }
 
     static GameFlow start(Difficulty difficulty, Version version, StatusListener... listeners) {
         var game = createGame(version, listeners);
-        return start(difficulty, game);
+        return start(difficulty, version, game);
     }
 }

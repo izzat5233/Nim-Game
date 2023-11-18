@@ -4,26 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78e009c0-4cbc-4598-98db-2e788037eb2f" name="Changes" comment="Added several factories for better structure.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/fxml/StatusController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Computers-Turn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Not-Allowed.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Player-1-Turn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Player-2-Turn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Your-Turn.png" afterDir="false" />
+    <list default="true" id="78e009c0-4cbc-4598-98db-2e788037eb2f" name="Changes" comment="Added game status controller &amp; several labels.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/fxml/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/fxml/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/fxml/MapController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/fxml/MapController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/fxml/object/Player.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/Status.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/position/PositionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/position/PositionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Computer-Wins.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Computer-Wins.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Player-1-Wins.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Player-1-Wins.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Player-2-Wins.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/Player-2-Wins.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/You-Win.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/assets/texts/You-Win.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/fxml/map.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/nimgame/fxml/map.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/player/Difficulty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/player/Difficulty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/player/PlayerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/nimgame/game/player/PlayerFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,8 +19,8 @@
       <list>
         <option value="Enum" />
         <option value="Record" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -121,7 +105,7 @@
       <workItem from="1700219709529" duration="4772000" />
       <workItem from="1700244955801" duration="3757000" />
       <workItem from="1700256382393" duration="9202000" />
-      <workItem from="1700309830722" duration="9006000" />
+      <workItem from="1700309830722" duration="10020000" />
     </task>
     <task id="LOCAL-00001" summary="Added GameFlow and UI difficulty options.">
       <option name="closed" value="true" />
@@ -203,7 +187,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700314197309</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Added game status controller &amp; several labels.">
+      <option name="closed" value="true" />
+      <created>1700319253156</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1700319253156</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,6 +223,7 @@
     <MESSAGE value="Updated the design with new assets. Created GameController." />
     <MESSAGE value="Added free play to main map." />
     <MESSAGE value="Added several factories for better structure." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added several factories for better structure." />
+    <MESSAGE value="Added game status controller &amp; several labels." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added game status controller &amp; several labels." />
   </component>
 </project>

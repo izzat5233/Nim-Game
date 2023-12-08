@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Line;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -57,6 +58,9 @@ public class MapController
     @FXML
     public VBox pilesContainer;
 
+    @FXML
+    public Line pilesLine;
+
     RadioGroup difficultyGroup, versionGroup;
 
     GameController gameController;
@@ -81,6 +85,7 @@ public class MapController
     private void setGameVisible(boolean visible) {
         statusImageView.setVisible(visible);
         pilesContainer.setVisible(visible);
+        pilesLine.setVisible(visible);
         ibBack.setVisible(visible);
         ibPlay.setVisible(visible);
         ibStart.setVisible(!visible);
